@@ -1,59 +1,59 @@
 const hotels = [
   {
     id: 1,
-    name: 'LCD admiral',
-    city: 'Rostov-on-Don',
-    apartmentArea: '81 m2',
-    repairTime: '3.5 months',
-    repairCost: 'Upon request',
+    name: "LCD admiral",
+    city: "Rostov-on-Don",
+    apartmentArea: "81 m2",
+    repairTime: "3.5 months",
+    repairCost: "Upon request",
   },
   {
     id: 2,
-    name: 'Thieves',
-    city: 'Sochi',
-    apartmentArea: '105 m2',
-    repairTime: '4 months',
-    repairCost: 'Upon request',
+    name: "Thieves",
+    city: "Sochi",
+    apartmentArea: "105 m2",
+    repairTime: "4 months",
+    repairCost: "Upon request",
   },
   {
     id: 3,
-    name: 'Patriotic',
-    city: 'Rostov-on-Don',
-    apartmentArea: '93 m2',
-    repairTime: '3 months',
-    repairCost: 'Upon request',
+    name: "Patriotic",
+    city: "Rostov-on-Don",
+    apartmentArea: "93 m2",
+    repairTime: "3 months",
+    repairCost: "Upon request",
   },
 ];
 
 let currentSlideIndex = 0;
 
-const cityWithNameElem = document.getElementById('cityWithName');
-const apartmentAreaElem = document.getElementById('apartmentArea');
-const repairTimeElem = document.getElementById('repairTime');
-const repairCostElem = document.getElementById('repairCost');
-const sliderNavButtons = document.querySelectorAll('.slider__nav-btn');
-const sliderItemWrapper = document.querySelector('.slider-item__wrapper');
+const cityWithNameElem = document.getElementById("cityWithName");
+const apartmentAreaElem = document.getElementById("apartmentArea");
+const repairTimeElem = document.getElementById("repairTime");
+const repairCostElem = document.getElementById("repairCost");
+const sliderNavButtons = document.querySelectorAll(".slider__nav-btn");
+const sliderItemWrapper = document.querySelector(".slider-item__wrapper");
 
 console.log(sliderItemWrapper);
 sliderItemWrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
 
-const prevButton = document.querySelector('.slider__controls-prev');
-const nextButton = document.querySelector('.slider__controls-next');
-const pagination = document.querySelector('.slider__controls-pagination');
+const prevButton = document.querySelector(".slider__controls-prev");
+const nextButton = document.querySelector(".slider__controls-next");
+const pagination = document.querySelector(".slider__controls-pagination");
 const paginationBullets = hotels.map((_, index) => {
-  const bullet = document.createElement('div');
-  bullet.classList.add('slider__controls-pagination-bullet');
-  if (index === 0) bullet.classList.add('active');
+  const bullet = document.createElement("div");
+  bullet.classList.add("slider__controls-pagination-bullet");
+  if (index === 0) bullet.classList.add("active");
   return bullet;
 });
 pagination.append(...paginationBullets);
 
-prevButton.addEventListener('click', () => {
+prevButton.addEventListener("click", () => {
   const index = decreaseIndex();
   updateData(index);
 });
 
-nextButton.addEventListener('click', () => {
+nextButton.addEventListener("click", () => {
   const index = increaseIndex();
   updateData(index);
 });
@@ -78,14 +78,16 @@ function decreaseIndex() {
 
 function updateData(activeSlideIndex) {
   const activeHotel = hotels[activeSlideIndex];
-  sliderItemWrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+  sliderItemWrapper.style.transform = `translateX(-${
+    currentSlideIndex * 100
+  }%)`;
   sliderNavButtons.forEach((button, index) => {
-    if (index === activeSlideIndex) button.classList.add('active');
-    if (index !== activeSlideIndex) button.classList.remove('active');
+    if (index === activeSlideIndex) button.classList.add("active");
+    if (index !== activeSlideIndex) button.classList.remove("active");
   });
   paginationBullets.forEach((bullet, index) => {
-    if (index === activeSlideIndex) bullet.classList.add('active');
-    if (index !== activeSlideIndex) bullet.classList.remove('active');
+    if (index === activeSlideIndex) bullet.classList.add("active");
+    if (index !== activeSlideIndex) bullet.classList.remove("active");
   });
   cityWithNameElem.innerHTML = `<span>${activeHotel.city}</span><span>${activeHotel.name}</span>`;
   apartmentAreaElem.innerText = activeHotel.apartmentArea;
@@ -94,14 +96,14 @@ function updateData(activeSlideIndex) {
 }
 
 sliderNavButtons.forEach((button, index) =>
-  button.addEventListener('click', () => {
+  button.addEventListener("click", () => {
     currentSlideIndex = index;
     updateData(index);
   })
 );
 
 paginationBullets.forEach((bullet, index) =>
-  bullet.addEventListener('click', () => {
+  bullet.addEventListener("click", () => {
     currentSlideIndex = index;
     updateData(index);
   })
